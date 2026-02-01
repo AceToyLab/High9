@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Morning Gratitude</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+```
+:root {
+  --bg: #faf8f5;
+  --accent: #c27a3a;
+  --text: #3a3230;
+  --text-light: #7a706a;
+}
+
+body {
+  font-family: 'Cormorant Garamond', serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Soft ambient background blobs */
+.blob {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.35;
+  pointer-events: none;
+  z-index: 0;
+  transition: background 1.2s ease;
+}
+.blob-1 { width: 360px; height: 360px; top: -100px; left: -100px; background: var(--accent); }
+.blob-2 { width: 280px; height: 280px; bottom: -80px; right: -80px; background: var(--accent); opacity: 0.25; }
+
+/* Card container */
+.card-wrapper {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Top decorative line */
+.deco-line {
+  width: 48px;
+  height: 2px;
+  background: var(--accent);
+  margin-bottom: 28px;
+  border-radius: 1px;
+  opacity: 0;
+  animation: fadeIn 0.6s ease 0.3s forwards;
+}
+
+/* Category badge */
+.category {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 24px;
+  opacity: 0;
+  animation: fadeIn 0.6s ease 0.5s forwards;
+}
+
+/* Main card */
+.card {
+  background: white;
+  border-radius: 24px;
+  padding: 44px 36px 40px;
+  box-shadow:
+    0 2px 8px rgba(0,0,0,0.04),
+    0 12px 40px rgba(0,0,0,0.07);
+  text-align: center;
+  position: relative;
+  opacity: 0;
+  transform: translateY(16px);
+  animation: slideUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.4s forwards;
+}
+
+/* Quotation mark */
+.quote-mark {
+  font-family: 'Playfair Display', serif;
+  font-size: 72px;
+  line-height: 0.8;
+  color: var(--accent);
+  opacity: 0.25;
+  margin-bottom: 8px;
+  display: block;
+}
+
+/* Message text */
+.message {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--text);
+  font-style: italic;
+  opacity: 0;
+  animation: fadeIn 0.8s ease 0.9s forwards;
+}
+
+/* Divider inside card */
+.card-divider {
+  width: 32px;
+  height: 1px;
+  background: #e0d8d0;
+  margin: 28px auto 20px;
+}
+
+/* Message number */
+.message-number {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 13px;
+  color: var(--text-light);
+  letter-spacing: 2px;
+  opacity: 0;
+  animation: fadeIn 0.6s ease 1.2s forwards;
+}
+
+/* Play button */
+.play-btn {
+  margin-top: 32px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 2px solid var(--accent);
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  opacity: 0;
+  animation: fadeIn 0.6s ease 1.4s forwards;
+}
+.play-btn:hover {
+  background: var(--accent);
+  box-shadow: 0 4px 20px rgba(194, 122, 58, 0.35);
+  transform: scale(1.05);
+}
+.play-btn:hover svg path {
+  fill: white;
+}
+.play-btn:active {
+  transform: scale(0.95);
+}
+.play-btn svg {
+  width: 20px;
+  height: 20px;
+  margin-left: 3px;
+}
+.play-btn svg path {
+  fill: var(--accent);
+  transition: fill 0.3s ease;
+}
+
+/* Playing state */
+.play-btn.playing {
+  background: var(--accent);
+  box-shadow: 0 4px 20px rgba(194, 122, 58, 0.35);
+}
+.play-btn.playing svg path {
+  fill: white;
+}
+
+/* Hint text below button */
+.hint {
+  margin-top: 14px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 14px;
+  color: var(--text-light);
+  opacity: 0;
+  animation: fadeIn 0.6s ease 1.6s forwards;
+}
+
+/* Another message link */
+.another {
+  margin-top: 36px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px;
+  color: var(--accent);
+  text-decoration: none;
+  letter-spacing: 1px;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s ease;
+  opacity: 0;
+  animation: fadeIn 0.6s ease 1.8s forwards;
+  cursor: pointer;
+  background: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  padding: 0;
+}
+.another:hover {
+  border-bottom-color: var(--accent);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+@keyframes slideUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Loading state */
+.loading {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  color: var(--text-light);
+  letter-spacing: 2px;
+}
+```
+
+  </style>
+</head>
+<body>
+
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+
+  <div class="card-wrapper" id="content">
+    <div class="loading">✦ loading ✦</div>
+  </div>
+
+  <script>
+    // ============================================================
+    // CONFIGURATION — change nothing here, edit messages.json only
+    // ============================================================
+    const MESSAGES_FILE = 'messages.json';
+
+    // ============================================================
+    let currentUtterance = null;
+    let isPlaying = false;
+
+    async function loadAndRender() {
+      try {
+        const response = await fetch(MESSAGES_FILE);
+        const messages = await response.json();
+
+        // Pick a random message
+        const random = messages[Math.floor(Math.random() * messages.length)];
+
+        // Update CSS variables for this message's colors
+        document.documentElement.style.setProperty('--accent', random.accent);
+        document.querySelector('.blob-1').style.background = random.background;
+        document.querySelector('.blob-2').style.background = random.accent;
+
+        // Render
+        const container = document.getElementById('content');
+        container.innerHTML = `
+          <div class="deco-line"></div>
+          <div class="category">${random.category}</div>
+          <div class="card">
+            <span class="quote-mark">"</span>
+            <p class="message">${random.message}</p>
+            <div class="card-divider"></div>
+            <div class="message-number">message ${random.id} of ${messages.length}</div>
+          </div>
+          <button class="play-btn" id="playBtn" onclick="toggleSpeech('${random.message.replace(/'/g, "\\'")}')">
+            <svg id="playIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+          <div class="hint">tap to listen</div>
+          <button class="another" onclick="location.reload()">✦ another message ✦</button>
+        `;
+
+      } catch (e) {
+        document.getElementById('content').innerHTML = '<div class="loading">something went wrong</div>';
+        console.error(e);
+      }
+    }
+
+    function toggleSpeech(text) {
+      const btn = document.getElementById('playBtn');
+      const icon = document.getElementById('playIcon');
+
+      if (isPlaying) {
+        // Stop
+        window.speechSynthesis.cancel();
+        isPlaying = false;
+        btn.classList.remove('playing');
+        icon.innerHTML = '<path d="M8 5v14l11-7z"/>';
+        return;
+      }
+
+      // Play
+      window.speechSynthesis.cancel(); // cancel any previous
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.rate = 0.85;
+      utterance.pitch = 1.05;
+      utterance.volume = 1;
+
+      // Try to pick a nice voice
+      const voices = window.speechSynthesis.getVoices();
+      const preferred = voices.find(v => v.name.includes('Samantha') || v.name.includes('Karen') || v.name.includes('Alex'));
+      if (preferred) utterance.voice = preferred;
+
+      utterance.onend = () => {
+        isPlaying = false;
+        btn.classList.remove('playing');
+        icon.innerHTML = '<path d="M8 5v14l11-7z"/>';
+      };
+      utterance.onerror = () => {
+        isPlaying = false;
+        btn.classList.remove('playing');
+        icon.innerHTML = '<path d="M8 5v14l11-7z"/>';
+      };
+
+      isPlaying = true;
+      btn.classList.add('playing');
+      icon.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
+      window.speechSynthesis.speak(utterance);
+    }
+
+    // Load voices first (required on some browsers), then render
+    if (window.speechSynthesis) {
+      window.speechSynthesis.getVoices();
+      if (window.speechSynthesis.onvoiceschanged !== undefined) {
+        window.speechSynthesis.onvoiceschanged = loadAndRender;
+      }
+    }
+    loadAndRender();
+  </script>
+
+</body>
+</html>
