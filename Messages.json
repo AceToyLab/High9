@@ -1,0 +1,72 @@
+[
+{
+“id”: 1,
+“category”: “gratitude”,
+“message”: “Today, I choose to focus on the little things that make life beautiful — the warmth of sunlight, a cup of coffee, and the simple fact that I get to experience another day.”,
+“background”: “#f0c27f”,
+“accent”: “#c27a3a”
+},
+{
+“id”: 2,
+“category”: “mindfulness”,
+“message”: “Before the day gets busy, take a moment to breathe deeply and remind yourself: you are alive, you are here, and that alone is something worth celebrating.”,
+“background”: “#a8d5ba”,
+“accent”: “#3a8a5c”
+},
+{
+“id”: 3,
+“category”: “gratitude”,
+“message”: “Today, be grateful for the lessons yesterday taught you — every challenge shaped you into the incredible person you are today.”,
+“background”: “#d4a5e5”,
+“accent”: “#7a3aab”
+},
+{
+“id”: 4,
+“category”: “motivation”,
+“message”: “You woke up with a heartbeat and a chance to make today count. That is a gift not everyone gets. Honor it by showing up as your best self.”,
+“background”: “#f7d794”,
+“accent”: “#c9910a”
+},
+{
+“id”: 5,
+“category”: “gratitude”,
+“message”: “Somewhere out there, someone is wishing for the life you have. Appreciate your health, your people, your peace — even if it feels ordinary.”,
+“background”: “#f5a8a8”,
+“accent”: “#b83232”
+},
+{
+“id”: 6,
+“category”: “motivation”,
+“message”: “You have survived every single hard day you have ever had. You are stronger than you know, and today is another chance to prove it.”,
+“background”: “#87ceeb”,
+“accent”: “#1a6a8a”
+},
+{
+“id”: 7,
+“category”: “mindfulness”,
+“message”: “Today, notice the small moments of joy — a smile from a stranger, a song you love, the feeling of fresh air. These are life’s quiet treasures.”,
+“background”: “#c3e6cb”,
+“accent”: “#2e7d32”
+},
+{
+“id”: 8,
+“category”: “self-love”,
+“message”: “You have a mind that can imagine, a heart that can love, and a spirit that can grow. What an extraordinary combination to carry into your day.”,
+“background”: “#e8d4f0”,
+“accent”: “#6a3d8a”
+},
+{
+“id”: 9,
+“category”: “gratitude”,
+“message”: “Not every day will be perfect, but every day holds something to be thankful for. Today, find yours and let it fill your heart.”,
+“background”: “#ffd6a5”,
+“accent”: “#d4700a”
+},
+{
+“id”: 10,
+“category”: “self-love”,
+“message”: “You matter more than you realize. The world is a little brighter simply because you are in it. Now go and shine.”,
+“background”: “#fadadd”,
+“accent”: “#c2185b”
+}
+]
